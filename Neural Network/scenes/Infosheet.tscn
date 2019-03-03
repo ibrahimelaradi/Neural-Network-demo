@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://textures/white40x40.png" type="Texture" id=1]
+
+[sub_resource type="TileSet" id=1]
+0/name = "white40x40.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 10, 10 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends TileMap
+
+export(Vector2) var boundries = Vector2(16,16)
+
+func get_info() -> Array:
+	var info = []
+	for i in range(0,boundries.x):
+		for j in range(0,boundries.y):
+			info.push_back(get_cell(i,j)+1)
+	return info
+"
+
+[node name="train_" type="TileMap"]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 10, 10 )
+format = 1
+script = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+margin_right = 160.0
+margin_bottom = 160.0
+color = Color( 0, 0, 0, 1 )
+
